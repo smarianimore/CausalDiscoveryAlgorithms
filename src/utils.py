@@ -64,8 +64,9 @@ def plot_causal_graph(
     return G, fig
 
 
-def process_data(data_start: pd.DataFrame) -> pd.DataFrame:
-    columns_to_neglect = ["timestamp", "device_type", "config", "GPU"]
+def process_data(data_start: pd.DataFrame, ignore_cols: list[str]) -> pd.DataFrame:
+    #columns_to_neglect = ["timestamp", "device_type", "config", "GPU"]
+    columns_to_neglect = ignore_cols
     data = data_start.drop(columns=columns_to_neglect)
     data["success"] = data["success"].astype(int)
     data = data.fillna(0)

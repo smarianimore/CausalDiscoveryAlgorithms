@@ -1,0 +1,62 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "cpu_utilization"
+        },
+        {
+            "id": "memory_usage"
+        },
+        {
+            "id": "pixel"
+        },
+        {
+            "id": "fps"
+        },
+        {
+            "id": "success"
+        },
+        {
+            "id": "distance"
+        },
+        {
+            "id": "consumption"
+        }
+    ],
+    "links": [
+        {
+            "source": "pixel",
+            "target": "success"
+        },
+        {
+            "source": "pixel",
+            "target": "cpu_utilization"
+        },
+        {
+            "source": "pixel",
+            "target": "memory_usage"
+        },
+        {
+            "source": "fps",
+            "target": "cpu_utilization"
+        },
+        {
+            "source": "fps",
+            "target": "memory_usage"
+        },
+        {
+            "source": "fps",
+            "target": "distance"
+        },
+        {
+            "source": "cpu_utilization",
+            "target": "consumption"
+        },
+        {
+            "source": "memory_usage",
+            "target": "consumption"
+        }
+    ]
+}

@@ -31,12 +31,12 @@ def run_algorithms(
 
 
 if __name__ == "__main__":
-    data_name = "xavier_gpu_6_20"
-    df_start = pd.read_csv(f"./data/{data_name}.csv")
+    data_name = "../Datasets-causality/TuWien-guys/FGCS/backup_entire_data_Laptop"
+    df_start = pd.read_csv(f"{data_name}.csv")
 
-    df = process_data(df_start)
+    df = process_data(df_start, ["execution_time", "timestamp", "stream_count"])
 
-    gt_graph = load_digraph_from_json(f"ground_truth/{data_name}.json")
+    gt_graph = load_digraph_from_json(f"ground_truth/{data_name.split('/')[-1]}.json")
     gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
 
     run_algorithms(df, data_name, gt_array)
