@@ -1,26 +1,42 @@
+import networkx as nx
+import numpy as np
 import pandas as pd
 from castle import algorithms
 
 from run_single import run_algorithm
-from src.utils import plot_causal_graph, process_data
+from src.utils import (
+    plot_causal_graph,
+    process_data,
+    save_graph_and_metrics,
+    load_digraph_from_json,
+    get_my_adjacency_matrix,
+)
 
 
-def run_algorithms(data: pd.DataFrame, ground_truth_graph=None):
+def run_algorithms(
+    data: pd.DataFrame, dir_save: str, ground_truth_graph: np.ndarray = None
+):
     # Loop through all available algorithms in castle.algorithms
     for algo_name in dir(algorithms):
         if algo_name != "ANMNonlinear":
             print("\n********")
             print(algo_name)
-            causal_matrix = run_algorithm(data, algo_name, ground_truth_graph)
+            causal_matrix_est, metrics = run_algorithm(
+                data, algo_name, ground_truth_graph
+            )
 
-            graph = plot_causal_graph(causal_matrix, data)
+            graph, fig_graph = plot_causal_graph(causal_matrix_est, data)
 
-            # TODO: save graph in some files and in png, compute metrics and store them
+            save_graph_and_metrics(graph, fig_graph, metrics, dir_save, algo_name)
 
 
 if __name__ == "__main__":
-    df_start = pd.read_csv("./data/xavier_gpu_6_20.csv")
+    data_name = "xavier_gpu_6_20"
+    df_start = pd.read_csv(f"./data/{data_name}.csv")
 
     df = process_data(df_start)
 
-    run_algorithms(df)
+    gt_graph = load_digraph_from_json("results/xavier_gpu_6_20/PC_causal_graph.json")
+    gt_array = get_my_adjacency_matrix(gt_graph)
+
+    run_algorithms(df, data_name, gt_array)

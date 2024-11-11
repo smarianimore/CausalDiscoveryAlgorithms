@@ -1,4 +1,7 @@
+import os
+import json
 import networkx as nx
+import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 
@@ -40,7 +43,7 @@ def plot_causal_graph(
                 G.add_edge(feature_names[i], feature_names[j])
 
     # Draw the graph
-    plt.figure(figsize=(8, 6))
+    fig = plt.figure(figsize=(8, 6))
     pos = nx.spring_layout(G, seed=42)  # Layout for a visually appealing graph
     nx.draw(
         G,
@@ -58,7 +61,7 @@ def plot_causal_graph(
     plt.title("Causal Graph")
     plt.show()
 
-    return G
+    return G, fig
 
 
 def process_data(data_start: pd.DataFrame) -> pd.DataFrame:
@@ -68,3 +71,86 @@ def process_data(data_start: pd.DataFrame) -> pd.DataFrame:
     data = data.fillna(0)
 
     return data
+
+
+def save_graph_and_metrics(
+    graph: nx.DiGraph, fig_graph: plt.Figure, metrics, dir_save: str, algo_name: str
+):
+    print(metrics)
+    current_dir = f"results/{dir_save}"
+    os.makedirs(current_dir, exist_ok=True)
+
+    # graph
+    save_digraph_as_json(graph, f"{current_dir}/{algo_name}_causal_graph.json")
+
+    # figure
+    fig_graph.savefig(f"{current_dir}/{algo_name}_causal_graph.png")
+
+    # metrics
+    if metrics is not None:
+        # Convert numpy types to native Python types
+        metrics_new = {
+            k: (v.item() if isinstance(v, np.generic) else v)
+            for k, v in metrics.items()
+        }
+
+        # Save to a JSON file
+        with open(f"{current_dir}/{algo_name}_metrics.json", "w") as f:
+            json.dump(metrics_new, f, indent=4)
+
+
+def save_digraph_as_json(digraph, filename):
+    """
+    Save a networkx.DiGraph as a JSON file.
+
+    Parameters:
+        digraph (nx.DiGraph): The directed graph to save.
+        filename (str): The path to the JSON file to save the graph.
+    """
+    # Convert the graph to a dictionary format suitable for JSON
+    graph_dict = nx.node_link_data(
+        digraph, edges="links"
+    )  # Explicitly set `edges="links"`
+
+    # Write the dictionary to a JSON file
+    with open(filename, "w") as f:
+        json.dump(graph_dict, f, indent=4)
+
+
+def load_digraph_from_json(filename):
+    """
+    Load a networkx.DiGraph from a JSON file.
+
+    Parameters:
+        filename (str): The path to the JSON file with the graph data.
+
+    Returns:
+        nx.DiGraph: The loaded directed graph.
+    """
+    # Read the JSON file
+    with open(filename, "r") as f:
+        graph_dict = json.load(f)
+
+    # Convert the dictionary to a networkx.DiGraph
+    digraph = nx.node_link_graph(
+        graph_dict, directed=True, edges="links"
+    )  # Specify 'links' or 'edges' as needed
+
+    return digraph
+
+
+def get_my_adjacency_matrix(digraph):
+    # Get the sorted list of nodes
+    nodes = sorted(digraph.nodes())
+    # Create an empty adjacency matrix
+    adj_matrix = np.zeros((len(nodes), len(nodes)), dtype=int)
+
+    # Map each node to an index in the matrix
+    node_index = {node: i for i, node in enumerate(nodes)}
+
+    # Fill the adjacency matrix
+    for edge in digraph.edges():
+        source, target = edge
+        adj_matrix[node_index[source]][node_index[target]] = 1
+
+    return adj_matrix

@@ -1,11 +1,22 @@
+from typing import Any, Tuple
+
+import numpy as np
 import pandas as pd
-from castle import algorithms
+from castle import algorithms, MetricsDAG
 from castle.common import Tensor
 
-from src.utils import process_data, plot_causal_graph
+from src.utils import (
+    process_data,
+    plot_causal_graph,
+    save_graph_and_metrics,
+    load_digraph_from_json,
+    get_my_adjacency_matrix,
+)
 
 
-def run_algorithm(data, algo_name="PC", ground_truth_graph=None) -> Tensor:
+def run_algorithm(
+    data: pd.DataFrame, algo_name: str = "PC", causal_matrix_gt: np.ndarray = None
+) -> Tuple[Tensor, Any]:
     if hasattr(algorithms, algo_name):
         algo_class = getattr(algorithms, algo_name)
         if isinstance(algo_class, type) and hasattr(algo_class, "learn"):
@@ -14,10 +25,16 @@ def run_algorithm(data, algo_name="PC", ground_truth_graph=None) -> Tensor:
                 cd = algo_class()
                 cd.learn(data)
 
-                # if hasattr(cd, "causal_matrix"):
-                # print(f"{algo_name} causal matrix:\n", type(cd.causal_matrix))
+                causal_matrix_est = cd.causal_matrix
 
-                return cd.causal_matrix
+                if causal_matrix_gt is not None:
+                    # calculate metrics
+                    mt = MetricsDAG(causal_matrix_est, causal_matrix_gt)
+                    metrics = mt.metrics
+                else:
+                    metrics = None
+
+                return causal_matrix_est, metrics
 
             except Exception as e:
                 print(f"{algo_name} failed with error: {e}")
@@ -28,14 +45,18 @@ def run_algorithm(data, algo_name="PC", ground_truth_graph=None) -> Tensor:
 
 
 if __name__ == "__main__":
-    df_start = pd.read_csv("./data/xavier_gpu_6_20.csv")
+    data_name = "xavier_gpu_6_20"
+    algo_name = "PC"
+
+    df_start = pd.read_csv(f"./data/{data_name}.csv")
 
     df = process_data(df_start)
 
-    # Specify the algorithm name if you want to run only one
-    specific_algorithm = (
-        "PC"  # Example: replace with the name of the algorithm you want to run
-    )
-    causal_matrix = run_algorithm(df, specific_algorithm)
+    gt_graph = load_digraph_from_json("results/xavier_gpu_6_20/PC_causal_graph.json")
+    gt_array = get_my_adjacency_matrix(gt_graph)
 
-    plot_causal_graph(causal_matrix, df)
+    causal_matrix_est, metrics = run_algorithm(df, algo_name, gt_array)
+
+    graph, fig_graph = plot_causal_graph(causal_matrix_est, df)
+
+    save_graph_and_metrics(graph, fig_graph, metrics, data_name, algo_name)
