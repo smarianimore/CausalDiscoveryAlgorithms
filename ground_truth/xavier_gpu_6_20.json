@@ -1,0 +1,97 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "execution_time"
+        },
+        {
+            "id": "cpu_utilization"
+        },
+        {
+            "id": "memory_usage"
+        },
+        {
+            "id": "pixel"
+        },
+        {
+            "id": "fps"
+        },
+        {
+            "id": "success"
+        },
+        {
+            "id": "distance"
+        },
+        {
+            "id": "consumption"
+        }
+    ],
+    "links": [
+        {
+            "source": "execution_time",
+            "target": "cpu_utilization"
+        },
+        {
+            "source": "execution_time",
+            "target": "memory_usage"
+        },
+        {
+            "source": "execution_time",
+            "target": "fps"
+        },
+        {
+            "source": "memory_usage",
+            "target": "success"
+        },
+        {
+            "source": "pixel",
+            "target": "success"
+        },
+        {
+            "source": "pixel",
+            "target": "distance"
+        },
+        {
+            "source": "pixel",
+            "target": "consumption"
+        },
+        {
+            "source": "fps",
+            "target": "cpu_utilization"
+        },
+        {
+            "source": "fps",
+            "target": "success"
+        },
+        {
+            "source": "fps",
+            "target": "consumption"
+        },
+        {
+            "source": "distance",
+            "target": "pixel"
+        },
+        {
+            "source": "distance",
+            "target": "success"
+        },
+        {
+            "source": "distance",
+            "target": "consumption"
+        },
+        {
+            "source": "consumption",
+            "target": "cpu_utilization"
+        },
+        {
+            "source": "consumption",
+            "target": "memory_usage"
+        },
+        {
+            "source": "consumption",
+            "target": "success"
+        }
+    ]
+}

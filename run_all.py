@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
     df = process_data(df_start)
 
-    gt_graph = load_digraph_from_json("results/xavier_gpu_6_20/PC_causal_graph.json")
-    gt_array = get_my_adjacency_matrix(gt_graph)
+    gt_graph = load_digraph_from_json(f"ground_truth/{data_name}.json")
+    gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
 
     run_algorithms(df, data_name, gt_array)

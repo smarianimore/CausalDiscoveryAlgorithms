@@ -22,7 +22,11 @@ def run_algorithm(
         if isinstance(algo_class, type) and hasattr(algo_class, "learn"):
             try:
                 # Instantiate and run the algorithm
-                cd = algo_class()
+                if hasattr(algo_class, "device_type"):
+                    cd = algo_class(device_type="gpu")
+                else:
+                    cd = algo_class()
+
                 cd.learn(data)
 
                 causal_matrix_est = cd.causal_matrix
@@ -52,8 +56,8 @@ if __name__ == "__main__":
 
     df = process_data(df_start)
 
-    gt_graph = load_digraph_from_json("results/xavier_gpu_6_20/PC_causal_graph.json")
-    gt_array = get_my_adjacency_matrix(gt_graph)
+    gt_graph = load_digraph_from_json(f"ground_truth/{data_name}.json")
+    gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
 
     causal_matrix_est, metrics = run_algorithm(df, algo_name, gt_array)
 
