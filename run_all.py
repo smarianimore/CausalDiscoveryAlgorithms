@@ -18,9 +18,12 @@ def run_algorithms(
 ):
     # Loop through all available algorithms in castle.algorithms
     for algo_name in dir(algorithms):
-        if algo_name != "ANMNonlinear":
+        if algo_name not in ["ANMNonlinear"]:
+            if algo_name == "GAE":
+                data = data.to_numpy()
             print("\n********")
             print(algo_name)
+
             causal_matrix_est, metrics = run_algorithm(
                 data, algo_name, ground_truth_graph
             )
