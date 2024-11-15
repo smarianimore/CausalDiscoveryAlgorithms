@@ -31,7 +31,7 @@ def run_algorithms(
 
 
 if __name__ == "__main__":
-    data_name = "../Datasets-causality/TuWien-guys/FGCS/backup_entire_data_Laptop"
+    data_name = "../TuWien-guys/FGCS/backup_entire_data_Laptop"
     df_start = pd.read_csv(f"{data_name}.csv")
 
     df = process_data(df_start, ["execution_time", "timestamp", "stream_count"])
