@@ -13,6 +13,38 @@ from src.utils import (
     get_my_adjacency_matrix,
 )
 
+def run_grandag(
+    data: pd.DataFrame, algo_name: str = "PC", causal_matrix_gt: np.ndarray = None, input_dim: int = 0
+) -> Tuple[Tensor, Any]:
+    if hasattr(algorithms, algo_name):
+        algo_class = getattr(algorithms, algo_name)
+        if isinstance(algo_class, type) and hasattr(algo_class, "learn"):
+            try:
+                # Instantiate and run the algorithm
+                if hasattr(algo_class, "device_type"):
+                    cd = algo_class(input_dim, device_type="gpu")
+                else:
+                    cd = algo_class(input_dim)
+
+                cd.learn(data)
+
+                causal_matrix_est = cd.causal_matrix
+
+                if causal_matrix_gt is not None:
+                    # calculate metrics
+                    mt = MetricsDAG(causal_matrix_est, causal_matrix_gt)
+                    metrics = mt.metrics
+                else:
+                    metrics = None
+
+                return causal_matrix_est, metrics
+
+            except Exception as e:
+                print(f"{algo_name} failed with error: {e}")
+        else:
+            print(f"{algo_name} does not have a learn method or is not a valid class.")
+    else:
+        print(f"{algo_name} is not a recognized algorithm in the castle library.")
 
 def run_algorithm(
     data: pd.DataFrame, algo_name: str = "PC", causal_matrix_gt: np.ndarray = None
