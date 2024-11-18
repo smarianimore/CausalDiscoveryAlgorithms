@@ -28,6 +28,8 @@ def run_algorithms(
                 data, algo_name, ground_truth_graph
             )
 
+            if algo_name == "GAE":
+                data = pd.DataFrame(data)
             graph, fig_graph = plot_causal_graph(causal_matrix_est, data)
 
             save_graph_and_metrics(graph, fig_graph, metrics, dir_save, algo_name)
