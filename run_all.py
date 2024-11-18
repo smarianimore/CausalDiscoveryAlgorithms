@@ -1,9 +1,12 @@
+import traceback
+
 import networkx as nx
 import numpy as np
 import pandas as pd
 from castle import algorithms
 
 from run_single import run_algorithm
+from run_single import run_grandag
 from src.utils import (
     plot_causal_graph,
     process_data,
@@ -24,15 +27,24 @@ def run_algorithms(
             print("\n********")
             print(algo_name)
 
-            causal_matrix_est, metrics = run_algorithm(
-                data, algo_name, ground_truth_graph
-            )
+            try:
+                if algo_name == "GraNDAG":
+                    causal_matrix_est, metrics = run_grandag(
+                        data, algo_name, ground_truth_graph, input_dim=len(data.columns)
+                    )
+                else:
+                    causal_matrix_est, metrics = run_algorithm(
+                        data, algo_name, ground_truth_graph
+                    )
 
-            if algo_name == "GAE":
-                data = pd.DataFrame(data)
-            graph, fig_graph = plot_causal_graph(causal_matrix_est, data)
+                if algo_name == "GAE":
+                    data = pd.DataFrame(data)
+                graph, fig_graph = plot_causal_graph(causal_matrix_est, data)
 
-            save_graph_and_metrics(graph, fig_graph, metrics, dir_save, algo_name)
+                save_graph_and_metrics(graph, fig_graph, metrics, dir_save, algo_name)
+            except Exception as e:
+                print(f"{algo_name} failed with error: {e}\nStack trace:")
+                traceback.print_exc()
 
 
 if __name__ == "__main__":
