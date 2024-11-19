@@ -43,8 +43,11 @@ def run_algorithms(
 
                 save_graph_and_metrics(graph, fig_graph, metrics, dir_save, algo_name)
             except Exception as e:
-                print(f"{algo_name} failed with error: {e}\nStack trace:")
-                traceback.print_exc()
+                with open("error_log.txt", "a") as f:
+                    print(f"{algo_name} failed with error: {e}\nStack trace logged on file.")
+                    datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    f.write(f"{datetime} : {algo_name} failed with error : {e}\n\tStack trace:\n")
+                    f.write(f"\t{traceback.print_exc()}")
 
 
 if __name__ == "__main__":
