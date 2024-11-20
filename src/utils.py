@@ -68,7 +68,9 @@ def process_data(data_start: pd.DataFrame, ignore_cols: list[str]) -> pd.DataFra
     #columns_to_neglect = ["timestamp", "device_type", "config", "GPU"]
     columns_to_neglect = ignore_cols
     data = data_start.drop(columns=columns_to_neglect)
-    data["success"] = data["success"].astype(int)
+    #data["success"] = data["success"].astype(int)
+    data = data.convert_dtypes()
+    print(f"\t\t{data.dtypes=}")
     data = data.fillna(0)
 
     return data

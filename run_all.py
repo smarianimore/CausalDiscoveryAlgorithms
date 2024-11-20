@@ -1,3 +1,4 @@
+from datetime import datetime
 import traceback
 
 import networkx as nx
@@ -45,18 +46,18 @@ def run_algorithms(
             except Exception as e:
                 with open("error_log.txt", "a") as f:
                     print(f"{algo_name} failed with error: {e}\nStack trace logged on file.")
-                    datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    f.write(f"{datetime} : {algo_name} failed with error : {e}\n\tStack trace:\n")
-                    f.write(f"\t{traceback.print_exc()}")
+                    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    f.write(f"{timestamp} : {algo_name} failed with error : {e}\n\tStack trace:\n")
+                    f.write(f"\t{traceback.print_stack()}")
 
 
 if __name__ == "__main__":
-    data_name = "../TuWien-guys/FGCS/backup_entire_data_Laptop"
+    data_name = "../DigitaTwins-Fischer/mps_dt_logs"
     df_start = pd.read_csv(f"{data_name}.csv")
 
-    df = process_data(df_start, ["execution_time", "timestamp", "stream_count"])
+    df = process_data(df_start, ["Source", "Timestamp"])
 
-    gt_graph = load_digraph_from_json(f"ground_truth/{data_name.split('/')[-1]}.json")
+    gt_graph = load_digraph_from_json()
     gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
 
     run_algorithms(df, data_name, gt_array)
