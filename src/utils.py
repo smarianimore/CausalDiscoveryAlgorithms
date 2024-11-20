@@ -59,7 +59,7 @@ def plot_causal_graph(
         # pos=nx.circular_layout(graph),
     )
     plt.title("Causal Graph")
-    plt.show()
+    #plt.show()
 
     return G, fig
 
@@ -72,6 +72,8 @@ def process_data(data_start: pd.DataFrame, ignore_cols: list[str]) -> pd.DataFra
     data = data.convert_dtypes()
     print(f"\t\t{data.dtypes=}")
     data = data.fillna(0)
+    strings = data.select_dtypes(include=["string"]).columns
+    data = pd.get_dummies(data, columns=strings)
 
     return data
 

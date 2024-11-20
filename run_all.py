@@ -52,12 +52,14 @@ def run_algorithms(
 
 
 if __name__ == "__main__":
-    data_name = "../DigitaTwins-Fischer/mps_dt_logs"
+    #data_name = "../Datasets-causality/DigitaTwins-Fischer/mps_dt_logs"
+    data_name = "../Datasets-causality/TuWien-guys/FGCS/backup_entire_data_Laptop"
     df_start = pd.read_csv(f"{data_name}.csv")
 
-    df = process_data(df_start, ["Source", "Timestamp"])
+    #df = process_data(df_start, ["Source", "Timestamp"])
+    df = process_data(df_start, ["execution_time", "timestamp", "stream_count"])
 
-    gt_graph = load_digraph_from_json()
+    gt_graph = load_digraph_from_json(None)
     gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
 
     run_algorithms(df, data_name, gt_array)
