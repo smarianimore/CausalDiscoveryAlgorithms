@@ -69,11 +69,20 @@ def process_data(data_start: pd.DataFrame, ignore_cols: list[str]) -> pd.DataFra
     columns_to_neglect = ignore_cols
     data = data_start.drop(columns=columns_to_neglect)
     #data["success"] = data["success"].astype(int)
-    data = data.convert_dtypes()
+    #data = data.convert_dtypes()
     print(f"\t\t{data.dtypes=}")
     data = data.fillna(0)
-    strings = data.select_dtypes(include=["string"]).columns
-    data = pd.get_dummies(data, columns=strings)
+    objects = data.select_dtypes(include=["object"]).columns
+    data = pd.get_dummies(data, columns=objects)
+    print(f"\t\t{data.dtypes=}")
+    #strings = data.select_dtypes(include=["string"]).columns
+    #data = pd.get_dummies(data, columns=strings)
+    #bools = data.select_dtypes(include=["boolean"]).columns
+    #data = pd.get_dummies(data, columns=bools, drop_first=True)
+    bools = data.select_dtypes(include=["bool"]).columns
+    for col in bools:
+        data[col] = data[col].astype(int)
+    print(f"\t\t{data.dtypes=}")
 
     return data
 
