@@ -130,14 +130,16 @@ def load_digraph_from_json(filename):
     Returns:
         nx.DiGraph: The loaded directed graph.
     """
+    digraph = None
     # Read the JSON file
-    with open(filename, "r") as f:
-        graph_dict = json.load(f)
+    if filename:
+        with open(filename, "r") as f:
+            graph_dict = json.load(f)
 
-    # Convert the dictionary to a networkx.DiGraph
-    digraph = nx.node_link_graph(
-        graph_dict, directed=True, edges="links"
-    )  # Specify 'links' or 'edges' as needed
+        # Convert the dictionary to a networkx.DiGraph
+        digraph = nx.node_link_graph(
+            graph_dict, directed=True, edges="links"
+        )  # Specify 'links' or 'edges' as needed
 
     return digraph
 
