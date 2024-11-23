@@ -4,3 +4,4 @@ numpy
 matplotlib
 networkx
 torch
+scikit-learn

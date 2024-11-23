@@ -4,6 +4,7 @@ import networkx as nx
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
+from sklearn.preprocessing import LabelEncoder
 
 
 def plot_causal_graph(
@@ -73,7 +74,9 @@ def process_data(data_start: pd.DataFrame, ignore_cols: list[str]) -> pd.DataFra
     print(f"\t\t{data.dtypes=}")
     data = data.fillna(0)
     objects = data.select_dtypes(include=["object"]).columns
-    data = pd.get_dummies(data, columns=objects)
+    le = LabelEncoder()
+    data[objects] = data[objects].apply(le.fit_transform)
+    # data = pd.get_dummies(data, columns=objects)
     print(f"\t\t{data.dtypes=}")
     #strings = data.select_dtypes(include=["string"]).columns
     #data = pd.get_dummies(data, columns=strings)
@@ -83,6 +86,7 @@ def process_data(data_start: pd.DataFrame, ignore_cols: list[str]) -> pd.DataFra
     for col in bools:
         data[col] = data[col].astype(int)
     print(f"\t\t{data.dtypes=}")
+    #print(data.sample(30))
 
     return data
 
