@@ -54,17 +54,17 @@ def run_algorithms(
 
 
 if __name__ == "__main__":
-    data_name = "../Datasets-causality/DigitaTwins-Fischer/mps-dt_logs"
+    data_name = "../Datasets-causality/DigitaTwins-Fischer/output-conveyor-dt_logs"
     #data_name = "../Datasets-causality/TuWien-guys/FGCS/backup_entire_data_Laptop"
     df_start = pd.read_csv(f"{data_name}.csv")
 
     df = process_data(df_start, ["Source", "Timestamp"], data_name)
     #df = process_data(df_start, ["execution_time", "timestamp", "stream_count"])
 
-    #gt_graph = load_digraph_from_json("ground_truth/output-conveyor-gt.json")
-    #gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
+    gt_graph = load_digraph_from_json("ground_truth/output-conveyor-gt.json")
+    gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
 
-    #run_algorithms(df, data_name, gt_array)
+    run_algorithms(df, data_name, gt_array)
 
 # gCastle metrics (from https://github.com/huawei-noah/trustworthyAI/blob/master/gcastle/castle/metrics/evaluation.py)
 #     fdr: (reverse + FP) / (TP + FP)
