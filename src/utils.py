@@ -65,19 +65,30 @@ def plot_causal_graph(
     return G, fig
 
 
-def process_data(data_start: pd.DataFrame, ignore_cols: list[str]) -> pd.DataFrame:
+def process_data(data_start: pd.DataFrame, ignore_cols: list[str], dir_save) -> pd.DataFrame:
     #columns_to_neglect = ["timestamp", "device_type", "config", "GPU"]
     columns_to_neglect = ignore_cols
     data = data_start.drop(columns=columns_to_neglect)
     #data["success"] = data["success"].astype(int)
     #data = data.convert_dtypes()
-    print(f"\t\t{data.dtypes=}")
+    print(f"########## Raw data types:\n{data.dtypes}")
     data = data.fillna(0)
     objects = data.select_dtypes(include=["object"]).columns
     le = LabelEncoder()
     data[objects] = data[objects].apply(le.fit_transform)
     # data = pd.get_dummies(data, columns=objects)
-    print(f"\t\t{data.dtypes=}")
+    print(f"########## Label-encoded data types:\n{data.dtypes}")
+    encodings = {}
+    for col in objects:
+        labels = [int(label) for label in data[col].unique()]
+        originals = le.inverse_transform(labels)
+        encoding = dict(zip(labels, originals))
+        print(f"########## encoding of {col}: {encoding}")
+        encodings[col] = encoding
+    current_dir = f"results/{dir_save}"
+    os.makedirs(current_dir, exist_ok=True)
+    with open(f"{current_dir}/encodings.json", "w") as f:
+        json.dump(encodings, f, indent=4)
     #strings = data.select_dtypes(include=["string"]).columns
     #data = pd.get_dummies(data, columns=strings)
     #bools = data.select_dtypes(include=["boolean"]).columns
@@ -85,8 +96,9 @@ def process_data(data_start: pd.DataFrame, ignore_cols: list[str]) -> pd.DataFra
     bools = data.select_dtypes(include=["bool"]).columns
     for col in bools:
         data[col] = data[col].astype(int)
-    print(f"\t\t{data.dtypes=}")
+    print(f"########## Final data types:\n{data.dtypes}")
     #print(data.sample(30))
+    print(f"########## {data.columns=}")
 
     return data
 

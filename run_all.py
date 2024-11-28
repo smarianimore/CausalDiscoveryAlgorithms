@@ -50,17 +50,35 @@ def run_algorithms(
                     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     f.write(f"{timestamp} : {algo_name} failed with error : {e}\n\tStack trace:\n")
                     traceback.print_exc(file=f)
+                    traceback.print_stack(file=f)
 
 
 if __name__ == "__main__":
-    data_name = "../Datasets-causality/DigitaTwins-Fischer/mps_dt_logs"
+    data_name = "../Datasets-causality/DigitaTwins-Fischer/mps-dt_logs"
     #data_name = "../Datasets-causality/TuWien-guys/FGCS/backup_entire_data_Laptop"
     df_start = pd.read_csv(f"{data_name}.csv")
 
-    df = process_data(df_start, ["Source", "Timestamp"])
+    df = process_data(df_start, ["Source", "Timestamp"], data_name)
     #df = process_data(df_start, ["execution_time", "timestamp", "stream_count"])
 
-    gt_graph = load_digraph_from_json(None)
-    gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
+    #gt_graph = load_digraph_from_json("ground_truth/output-conveyor-gt.json")
+    #gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
 
-    run_algorithms(df, data_name, gt_array)
+    #run_algorithms(df, data_name, gt_array)
+
+# gCastle metrics (from https://github.com/huawei-noah/trustworthyAI/blob/master/gcastle/castle/metrics/evaluation.py)
+#     fdr: (reverse + FP) / (TP + FP)
+#     tpr: TP/(TP + FN)
+#     fpr: (reverse + FP) / (TN + FP)
+#     shd: undirected extra + undirected missing + reverse
+#     nnz: TP + FP
+#     precision: TP/(TP + FP)
+#     recall: TP/(TP + FN)
+#     F1: 2*(recall*precision)/(recall+precision)
+#     gscore: max(0, (TP-FP))/(TP+FN), A score ranges from 0 to 1
+# where
+#     true positive(TP): an edge estimated with correct direction.
+#     true nagative(TN): an edge that is neither in estimated graph nor in true graph.
+#     false positive(FP): an edge that is in estimated graph but not in the true graph.
+#     false negative(FN): an edge that is not in estimated graph but in the true graph.
+#     reverse = an edge estimated with reversed direction.
