@@ -1,7 +1,6 @@
-from datetime import datetime
 import traceback
+from datetime import datetime
 
-import networkx as nx
 import numpy as np
 import pandas as pd
 from castle import algorithms
@@ -20,6 +19,17 @@ from src.utils import (
 def run_algorithms(
     data: pd.DataFrame, dir_save: str, ground_truth_graph: np.ndarray = None
 ):
+    """
+        Runs various causal discovery algorithms on the provided data and saves the results.
+
+        Args:
+            data (pd.DataFrame): The input DataFrame containing the data to be processed.
+            dir_save (str): The directory path where the results will be saved.
+            ground_truth_graph (np.ndarray, optional): The ground truth adjacency matrix of the causal graph. Defaults to None.
+
+        Returns:
+            None
+        """
     # Loop through all available algorithms in castle.algorithms
     for algo_name in dir(algorithms):
         if algo_name not in ["ANMNonlinear"]:
@@ -54,17 +64,13 @@ def run_algorithms(
 
 
 if __name__ == "__main__":
-    data_name = "../Datasets-causality/DigitaTwins-Fischer/output-conveyor-dt_logs"
-    #data_name = "../Datasets-causality/TuWien-guys/FGCS/backup_entire_data_Laptop"
-    df_start = pd.read_csv(f"{data_name}.csv")
-
-    df = process_data(df_start, ["Source", "Timestamp"], data_name)
-    #df = process_data(df_start, ["execution_time", "timestamp", "stream_count"])
-
-    gt_graph = load_digraph_from_json("ground_truth/output-conveyor-gt.json")
+    input_data_file_path = "../Datasets-causality/DigitaTwins-Fischer/indexed-line-data/conveyor-in-dt_logs.csv"
+    gt_graph_filepath = "../Datasets-causality/DigitaTwins-Fischer/indexed line graphs/Input_Conveyor_Graph.json"
+    data = pd.read_csv(input_data_file_path)
+    df = process_data(data, ["Source", "Timestamp"], input_data_file_path)
+    gt_graph = load_digraph_from_json(gt_graph_filepath)
     gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
-
-    run_algorithms(df, data_name, gt_array)
+    run_algorithms(df, input_data_file_path, gt_array)
 
 # gCastle metrics (from https://github.com/huawei-noah/trustworthyAI/blob/master/gcastle/castle/metrics/evaluation.py)
 #     fdr: (reverse + FP) / (TP + FP)

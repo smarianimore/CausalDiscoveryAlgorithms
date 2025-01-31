@@ -13,13 +13,26 @@ from src.utils import (
     get_my_adjacency_matrix,
 )
 
+
 def run_grandag(
     data: pd.DataFrame, algo_name: str = "PC", causal_matrix_gt: np.ndarray = None, input_dim: int = 0
 ) -> Tuple[Tensor, Any]:
+    """
+        Runs the GraNDAG algorithm on the provided data and returns the estimated causal matrix and metrics.
+
+        Args:
+            data (pd.DataFrame): The input DataFrame containing the data to be processed.
+            algo_name (str): The name of the algorithm to be used. Defaults to "PC".
+            causal_matrix_gt (np.ndarray, optional): The ground truth adjacency matrix of the causal graph. Defaults to None.
+            input_dim (int, optional): The input dimension for the algorithm. Defaults to 0.
+
+        Returns:
+            Tuple[Tensor, Any]: A tuple containing the estimated causal matrix and the calculated metrics (if ground truth is provided).
+        """
     if hasattr(algorithms, algo_name):
         algo_class = getattr(algorithms, algo_name)
         if isinstance(algo_class, type) and hasattr(algo_class, "learn"):
-            try:
+            #try:
                 # Instantiate and run the algorithm
                 if hasattr(algo_class, "device_type"):
                     cd = algo_class(input_dim, device_type="gpu")
@@ -39,8 +52,8 @@ def run_grandag(
 
                 return causal_matrix_est, metrics
 
-            except Exception as e:
-                print(f"{algo_name} failed with error: {e}")
+            #except Exception as e:
+                #print(f"{algo_name} failed with error: {e}")
         else:
             print(f"{algo_name} does not have a learn method or is not a valid class.")
     else:
@@ -49,10 +62,21 @@ def run_grandag(
 def run_algorithm(
     data: pd.DataFrame, algo_name: str = "PC", causal_matrix_gt: np.ndarray = None
 ) -> Tuple[Tensor, Any]:
+    """
+        Runs a specified causal discovery algorithm on the provided data and returns the estimated causal matrix and metrics.
+
+        Args:
+            data (pd.DataFrame): The input DataFrame containing the data to be processed.
+            algo_name (str): The name of the algorithm to be used. Defaults to "PC".
+            causal_matrix_gt (np.ndarray, optional): The ground truth adjacency matrix of the causal graph. Defaults to None.
+
+        Returns:
+            Tuple[Tensor, Any]: A tuple containing the estimated causal matrix and the calculated metrics (if ground truth is provided).
+        """
     if hasattr(algorithms, algo_name):
         algo_class = getattr(algorithms, algo_name)
         if isinstance(algo_class, type) and hasattr(algo_class, "learn"):
-            try:
+            #try:
                 # Instantiate and run the algorithm
                 if hasattr(algo_class, "device_type"):
                     cd = algo_class(device_type="gpu")
@@ -72,8 +96,8 @@ def run_algorithm(
 
                 return causal_matrix_est, metrics
 
-            except Exception as e:
-                print(f"{algo_name} failed with error: {e}")
+            #except Exception as e:
+                #print(f"{algo_name} failed with error: {e}")
         else:
             print(f"{algo_name} does not have a learn method or is not a valid class.")
     else:

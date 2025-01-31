@@ -1,15 +1,19 @@
-import os
 import json
+import logging
+import os
+
 import networkx as nx
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s|%(levelname)s|%(message)s')
+
 
 def plot_causal_graph(
-    causal_matrix,
-    df,
+    causal_matrix: np.array,
+    df: pd.DataFrame,
     FONT_SIZE_NODE_GRAPH: int = 10,
     ARROWS_SIZE_NODE_GRAPH: int = 30,
     NODE_SIZE_GRAPH: int = 1000,
@@ -65,49 +69,84 @@ def plot_causal_graph(
     return G, fig
 
 
-def process_data(data_start: pd.DataFrame, ignore_cols: list[str], dir_save) -> pd.DataFrame:
-    #columns_to_neglect = ["timestamp", "device_type", "config", "GPU"]
-    columns_to_neglect = ignore_cols
-    data = data_start.drop(columns=columns_to_neglect)
-    #data["success"] = data["success"].astype(int)
-    #data = data.convert_dtypes()
-    print(f"########## Raw data types:\n{data.dtypes}")
-    data = data.fillna(0)
-    objects = data.select_dtypes(include=["object"]).columns
+def label_encode_categoricals(df: pd.DataFrame, name: str) -> pd.DataFrame:
+    """
+        Label encodes categorical columns in the given DataFrame and saves the encodings to a JSON file.
+
+        Args:
+            df (pd.DataFrame): The DataFrame containing the data to be encoded.
+            name (str): The name to be used for the encoding file.
+
+        Returns:
+            pd.DataFrame: The DataFrame with the categorical columns label encoded.
+        """
+    df = df.convert_dtypes()
+    logging.info(f"{df.dtypes=}")
+    # objects = df.select_dtypes(include=["object"]).columns
+    objects = df.select_dtypes(include=["string[python]"]).columns
+    logging.info(f"{objects=}")
     le = LabelEncoder()
-    data[objects] = data[objects].apply(le.fit_transform)
-    # data = pd.get_dummies(data, columns=objects)
-    print(f"########## Label-encoded data types:\n{data.dtypes}")
+    df[objects] = df[objects].apply(le.fit_transform)
+    logging.info(f"Label-encoded data types:\n{df.dtypes}")
     encodings = {}
     for col in objects:
-        labels = [int(label) for label in data[col].unique()]
+        labels = [int(label) for label in df[col].unique()]
         originals = le.inverse_transform(labels)
         encoding = dict(zip(labels, originals))
-        print(f"########## encoding of {col}: {encoding}")
+        logging.info(f"encoding of {col}: {encoding}")
         encodings[col] = encoding
-    current_dir = f"results/{dir_save}"
+    current_dir = f"results/{name}"
     os.makedirs(current_dir, exist_ok=True)
-    with open(f"{current_dir}/encodings.json", "w") as f:
-        json.dump(encodings, f, indent=4)
-    #strings = data.select_dtypes(include=["string"]).columns
-    #data = pd.get_dummies(data, columns=strings)
-    #bools = data.select_dtypes(include=["boolean"]).columns
-    #data = pd.get_dummies(data, columns=bools, drop_first=True)
-    bools = data.select_dtypes(include=["bool"]).columns
+    with open(f"{current_dir}/{name}_encodings.json", "w") as f:
+        json.dump(encodings, f,
+                  indent=4)  # from https://docs.python.org/3.11/library/json.html#json.dump "Note Keys in key/value pairs of JSON are always of the type str. When a dictionary is converted into JSON, all the keys of the dictionary are coerced to strings."
+    bools = df.select_dtypes(include=["bool"]).columns
     for col in bools:
-        data[col] = data[col].astype(int)
-    print(f"########## Final data types:\n{data.dtypes}")
-    #print(data.sample(30))
-    print(f"########## {data.columns=}")
+        df[col] = df[col].astype(int)
+    print(f"########## Final data types:\n{df.dtypes}")
+    return df
 
-    return data
+
+def process_data(data: pd.DataFrame, ignore_cols: list[str], outpath: str) -> pd.DataFrame:
+    """
+        Processes the input data by dropping specified columns, filling missing values, and label encoding categorical columns.
+
+        Args:
+            data (pd.DataFrame): The input DataFrame containing the data to be processed.
+            ignore_cols (list[str]): A list of column names to be ignored (dropped) from the DataFrame.
+            outpath (str): The output path where the processed data and encodings will be saved.
+
+        Returns:
+            pd.DataFrame: The processed DataFrame with specified columns dropped, missing values filled, and categorical columns label encoded.
+        """
+    out_file_name = f"{outpath.split('/')[-1].split('.')[0]}"
+    data = data.drop(columns=ignore_cols)
+    #data = data.convert_dtypes()
+    print(f"########## Raw data types:\n{data.dtypes}")
+    data = data.fillna(0)  # TODO questionable
+    df = label_encode_categoricals(data, out_file_name)
+    return df
 
 
 def save_graph_and_metrics(
-    graph: nx.DiGraph, fig_graph: plt.Figure, metrics, dir_save: str, algo_name: str
+    graph: nx.DiGraph, fig_graph: plt.Figure, metrics: dict, outpath: str, algo_name: str
 ):
+    """
+        Saves the causal graph, its figure, and the calculated metrics to the specified directory.
+
+        Args:
+            graph (nx.DiGraph): The directed graph to be saved.
+            fig_graph (plt.Figure): The matplotlib figure of the graph to be saved.
+            metrics (dict): The metrics calculated for the graph.
+            outpath (str): The output path where the results will be saved.
+            algo_name (str): The name of the algorithm used to generate the graph.
+
+        Returns:
+            None
+        """
     print(metrics)
-    current_dir = f"results/{dir_save}"
+    out_file_name = f"{outpath.split('/')[-1].split('.')[0]}"
+    current_dir = f"results/{out_file_name}"
     os.makedirs(current_dir, exist_ok=True)
 
     # graph
@@ -129,7 +168,7 @@ def save_graph_and_metrics(
             json.dump(metrics_new, f, indent=4)
 
 
-def save_digraph_as_json(digraph, filename):
+def save_digraph_as_json(digraph: nx.DiGraph, filename: str):
     """
     Save a networkx.DiGraph as a JSON file.
 
@@ -147,7 +186,7 @@ def save_digraph_as_json(digraph, filename):
         json.dump(graph_dict, f, indent=4)
 
 
-def load_digraph_from_json(filename):
+def load_digraph_from_json(filename: str) -> nx.DiGraph:
     """
     Load a networkx.DiGraph from a JSON file.
 
@@ -158,31 +197,33 @@ def load_digraph_from_json(filename):
         nx.DiGraph: The loaded directed graph.
     """
     digraph = None
-    # Read the JSON file
     if filename:
         with open(filename, "r") as f:
             graph_dict = json.load(f)
-
-        # Convert the dictionary to a networkx.DiGraph
         digraph = nx.node_link_graph(
             graph_dict, directed=True, edges="links"
-        )  # Specify 'links' or 'edges' as needed
-
+        )  # Specify 'links' or 'edges' as needed TODO ???
     return digraph
 
 
-def get_my_adjacency_matrix(digraph):
+def get_my_adjacency_matrix(digraph: nx.DiGraph) -> np.ndarray:
+    """
+        Generates an adjacency matrix from a given directed graph.
+
+        Args:
+            digraph (nx.DiGraph): The directed graph from which to generate the adjacency matrix.
+
+        Returns:
+            np.ndarray: A 2D numpy array representing the adjacency matrix of the graph.
+        """
     # Get the sorted list of nodes
     nodes = sorted(digraph.nodes())
     # Create an empty adjacency matrix
     adj_matrix = np.zeros((len(nodes), len(nodes)), dtype=int)
-
     # Map each node to an index in the matrix
     node_index = {node: i for i, node in enumerate(nodes)}
-
     # Fill the adjacency matrix
     for edge in digraph.edges():
         source, target = edge
         adj_matrix[node_index[source]][node_index[target]] = 1
-
     return adj_matrix
