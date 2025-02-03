@@ -45,6 +45,7 @@ def run_grandag(
 
                 if causal_matrix_gt is not None:
                     # calculate metrics
+                    print(f"DIMS: {causal_matrix_est.shape=} vs. {causal_matrix_gt.shape=}")
                     mt = MetricsDAG(causal_matrix_est, causal_matrix_gt)
                     metrics = mt.metrics
                 else:
@@ -89,6 +90,7 @@ def run_algorithm(
 
                 if causal_matrix_gt is not None:
                     # calculate metrics
+                    print(f"DIMS: {causal_matrix_est.shape=} vs. {causal_matrix_gt.shape=}")
                     mt = MetricsDAG(causal_matrix_est, causal_matrix_gt)
                     metrics = mt.metrics
                 else:

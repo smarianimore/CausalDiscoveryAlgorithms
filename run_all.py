@@ -1,3 +1,4 @@
+import os
 import traceback
 from datetime import datetime
 
@@ -55,7 +56,10 @@ def run_algorithms(
                 save_graph_and_metrics(graph, fig_graph, metrics, dir_save, algo_name)
 
             except Exception as e:
-                with open("error_log.txt", "a") as f:
+                out_file_name = f"{dir_save.split('/')[-1].split('.')[0]}"
+                current_dir = f"results/{out_file_name}"
+                os.makedirs(current_dir, exist_ok=True)
+                with open(f"{current_dir}/error_log.txt", "a") as f:
                     print(f"{algo_name} failed with error: {e}\nStack trace logged on file.")
                     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     f.write(f"{timestamp} : {algo_name} failed with error : {e}\n\tStack trace:\n")
@@ -65,9 +69,11 @@ def run_algorithms(
 
 if __name__ == "__main__":
     input_data_file_path = "../Datasets-causality/DigitaTwins-Fischer/indexed-line-data/conveyor-in-dt_logs.csv"
-    gt_graph_filepath = "../Datasets-causality/DigitaTwins-Fischer/indexed line graphs/Input_Conveyor_Graph.json"
-    data = pd.read_csv(input_data_file_path)
-    df = process_data(data, ["Source", "Timestamp"], input_data_file_path)
+    gt_graph_filepath = "../Datasets-causality/DigitaTwins-Fischer/indexed line graphs/Input_Conveyor_Graph-reduced.json"
+    data = pd.read_csv(input_data_file_path, usecols=['Working-cicle', 'Conveyor_1-piece-exit', 'Anomaly-detected', 'Pieces-done', 'OEE', 'Conveyor_1-piece-ready', 'Running-cicle', 'Resetting-phase', 'state'])
+    print(f"PRE {data.columns=}")
+    df = process_data(data, [], input_data_file_path)
+    print(f"POST {data.columns=}")
     gt_graph = load_digraph_from_json(gt_graph_filepath)
     gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
     run_algorithms(df, input_data_file_path, gt_array)

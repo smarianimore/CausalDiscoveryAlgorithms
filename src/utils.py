@@ -8,7 +8,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s|%(levelname)s|%(message)s')
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s|%(levelname)s] %(message)s')
 
 
 def plot_causal_graph(
@@ -80,10 +80,10 @@ def label_encode_categoricals(df: pd.DataFrame, name: str) -> pd.DataFrame:
         Returns:
             pd.DataFrame: The DataFrame with the categorical columns label encoded.
         """
-    df = df.convert_dtypes()
-    logging.info(f"{df.dtypes=}")
-    # objects = df.select_dtypes(include=["object"]).columns
-    objects = df.select_dtypes(include=["string[python]"]).columns
+    #df = df.convert_dtypes()
+    #logging.info(f"{df.dtypes=}")
+    objects = df.select_dtypes(include=["object"]).columns
+    #objects = df.select_dtypes(include=["string[python]"]).columns
     logging.info(f"{objects=}")
     le = LabelEncoder()
     df[objects] = df[objects].apply(le.fit_transform)
@@ -120,7 +120,8 @@ def process_data(data: pd.DataFrame, ignore_cols: list[str], outpath: str) -> pd
             pd.DataFrame: The processed DataFrame with specified columns dropped, missing values filled, and categorical columns label encoded.
         """
     out_file_name = f"{outpath.split('/')[-1].split('.')[0]}"
-    data = data.drop(columns=ignore_cols)
+    if ignore_cols:
+        data = data.drop(columns=ignore_cols)
     #data = data.convert_dtypes()
     print(f"########## Raw data types:\n{data.dtypes}")
     data = data.fillna(0)  # TODO questionable
