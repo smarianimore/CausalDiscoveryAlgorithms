@@ -1,0 +1,105 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "conveyor-in-state"
+        },
+        {
+            "id": "conveyor-out-state"
+        },
+        {
+            "id": "cutter-state"
+        },
+        {
+            "id": "conveyor-out-oee"
+        },
+        {
+            "id": "pickable"
+        },
+        {
+            "id": "conveyor-in-oee"
+        },
+        {
+            "id": "placeable"
+        },
+        {
+            "id": "state"
+        },
+        {
+            "id": "drill-oee"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "cutter-oee"
+        },
+        {
+            "id": "drill-state"
+        }
+    ],
+    "links": [
+        {
+            "source": "conveyor-in-state",
+            "target": "cutter-state"
+        },
+        {
+            "source": "conveyor-in-state",
+            "target": "state"
+        },
+        {
+            "source": "cutter-state",
+            "target": "drill-state"
+        },
+        {
+            "source": "conveyor-in-oee",
+            "target": "conveyor-out-oee"
+        },
+        {
+            "source": "placeable",
+            "target": "cutter-state"
+        },
+        {
+            "source": "placeable",
+            "target": "state"
+        },
+        {
+            "source": "state",
+            "target": "conveyor-out-state"
+        },
+        {
+            "source": "state",
+            "target": "cutter-state"
+        },
+        {
+            "source": "state",
+            "target": "drill-state"
+        },
+        {
+            "source": "drill-oee",
+            "target": "OEE"
+        },
+        {
+            "source": "drill-oee",
+            "target": "cutter-oee"
+        },
+        {
+            "source": "OEE",
+            "target": "conveyor-in-oee"
+        },
+        {
+            "source": "OEE",
+            "target": "cutter-oee"
+        },
+        {
+            "source": "cutter-oee",
+            "target": "conveyor-in-oee"
+        },
+        {
+            "source": "cutter-oee",
+            "target": "drill-state"
+        }
+    ]
+}

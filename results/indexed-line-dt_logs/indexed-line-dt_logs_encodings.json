@@ -1,0 +1,39 @@
+{
+    "conveyor-in-state": {
+        "4": "START",
+        "1": "READY",
+        "0": "INHERITED_ANOMALY",
+        "3": "RESETTING",
+        "2": "RESET"
+    },
+    "conveyor-out-state": {
+        "4": "START",
+        "0": "INHERITED_ANOMALY",
+        "3": "RESETTING",
+        "2": "RESET",
+        "1": "READY",
+        "5": "WORKING"
+    },
+    "cutter-state": {
+        "4": "START",
+        "5": "WORKING",
+        "1": "READY",
+        "0": "INHERITED_ANOMALY",
+        "3": "RESETTING",
+        "2": "RESET"
+    },
+    "state": {
+        "2": "RESET",
+        "1": "READY",
+        "0": "INHERITED_ANOMALY",
+        "3": "RESETTING"
+    },
+    "drill-state": {
+        "4": "START",
+        "5": "WORKING",
+        "1": "READY",
+        "0": "INHERITED_ANOMALY",
+        "3": "RESETTING",
+        "2": "RESET"
+    }
+}

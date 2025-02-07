@@ -68,12 +68,14 @@ def run_algorithms(
 
 
 if __name__ == "__main__":
-    input_data_file_path = "../Datasets-causality/DigitaTwins-Fischer/indexed-line-data/conveyor-in-dt_logs.csv"
-    gt_graph_filepath = "../Datasets-causality/DigitaTwins-Fischer/indexed line graphs/Input_Conveyor_Graph-reduced.json"
-    data = pd.read_csv(input_data_file_path, usecols=['Working-cicle', 'Conveyor_1-piece-exit', 'Anomaly-detected', 'Pieces-done', 'OEE', 'Conveyor_1-piece-ready', 'Running-cicle', 'Resetting-phase', 'state'])
-    print(f"PRE {data.columns=}")
+    input_data_file_path = "../Datasets-causality/DigitaTwins-Fischer/multi-process-station-data/vacuum-gripper-dt_logs.csv"
+    gt_graph_filepath = "../Datasets-causality/DigitaTwins-Fischer/multi-process-station-graphs/Vacuum-Gripper_Graph-reduced.json"
+    data = pd.read_csv(input_data_file_path, usecols=['vacuum-gripper-motor-clockwise', 'vacuum-gripper-at-turntable',
+                                                      'vacuum-gripper-motor-counterclockwise', 'OEE', 'vacuum-gripper-at-oven',
+                                                      'machine-state', 'piece-count', 'vacuum-gripper-piston', 'vacuum-gripper-gripper'])
+    #print(f"PRE {data.columns=}")
     df = process_data(data, [], input_data_file_path)
-    print(f"POST {data.columns=}")
+    #print(f"POST {data.columns=}")
     gt_graph = load_digraph_from_json(gt_graph_filepath)
     gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
     run_algorithms(df, input_data_file_path, gt_array)

@@ -1,0 +1,71 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "output-conveyor-state-anomaly"
+        },
+        {
+            "id": "output-conveyor-motor"
+        },
+        {
+            "id": "machine-state"
+        },
+        {
+            "id": "piece-count"
+        },
+        {
+            "id": "output-conveyor-output-photocell"
+        },
+        {
+            "id": "OEE"
+        }
+    ],
+    "links": [
+        {
+            "source": "output-conveyor-motor",
+            "target": "output-conveyor-state-anomaly"
+        },
+        {
+            "source": "output-conveyor-motor",
+            "target": "machine-state"
+        },
+        {
+            "source": "machine-state",
+            "target": "output-conveyor-state-anomaly"
+        },
+        {
+            "source": "machine-state",
+            "target": "output-conveyor-motor"
+        },
+        {
+            "source": "machine-state",
+            "target": "output-conveyor-output-photocell"
+        },
+        {
+            "source": "piece-count",
+            "target": "output-conveyor-state-anomaly"
+        },
+        {
+            "source": "piece-count",
+            "target": "OEE"
+        },
+        {
+            "source": "output-conveyor-output-photocell",
+            "target": "output-conveyor-state-anomaly"
+        },
+        {
+            "source": "output-conveyor-output-photocell",
+            "target": "machine-state"
+        },
+        {
+            "source": "OEE",
+            "target": "output-conveyor-state-anomaly"
+        },
+        {
+            "source": "OEE",
+            "target": "piece-count"
+        }
+    ]
+}

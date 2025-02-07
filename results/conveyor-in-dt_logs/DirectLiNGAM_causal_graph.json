@@ -1,0 +1,52 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "Working-cicle"
+        },
+        {
+            "id": "Conveyor_1-piece-exit"
+        },
+        {
+            "id": "Anomaly-detected"
+        },
+        {
+            "id": "Pieces-done"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "Conveyor_1-piece-ready"
+        },
+        {
+            "id": "Running-cicle"
+        },
+        {
+            "id": "Resetting-phase"
+        },
+        {
+            "id": "state"
+        }
+    ],
+    "links": [
+        {
+            "source": "Working-cicle",
+            "target": "OEE"
+        },
+        {
+            "source": "Working-cicle",
+            "target": "state"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Running-cicle"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "state"
+        }
+    ]
+}

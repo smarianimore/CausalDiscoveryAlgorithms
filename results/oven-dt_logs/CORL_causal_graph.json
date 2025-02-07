@@ -1,0 +1,166 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "oven-carrier-inside"
+        },
+        {
+            "id": "oven-door"
+        },
+        {
+            "id": "oven-temperature"
+        },
+        {
+            "id": "oven-carrier-counterclockwise"
+        },
+        {
+            "id": "oven-heater"
+        },
+        {
+            "id": "oven-carrier-clockwise"
+        },
+        {
+            "id": "oven-input-photocell"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "oven-carrier-outside"
+        },
+        {
+            "id": "machine-state"
+        },
+        {
+            "id": "piece-count"
+        }
+    ],
+    "links": [
+        {
+            "source": "oven-carrier-inside",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "oven-carrier-inside",
+            "target": "oven-carrier-outside"
+        },
+        {
+            "source": "oven-carrier-inside",
+            "target": "machine-state"
+        },
+        {
+            "source": "oven-door",
+            "target": "oven-carrier-inside"
+        },
+        {
+            "source": "oven-door",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "oven-door",
+            "target": "oven-heater"
+        },
+        {
+            "source": "oven-door",
+            "target": "oven-carrier-outside"
+        },
+        {
+            "source": "oven-door",
+            "target": "piece-count"
+        },
+        {
+            "source": "oven-carrier-counterclockwise",
+            "target": "oven-carrier-inside"
+        },
+        {
+            "source": "oven-carrier-counterclockwise",
+            "target": "oven-door"
+        },
+        {
+            "source": "oven-carrier-counterclockwise",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "oven-carrier-counterclockwise",
+            "target": "oven-carrier-outside"
+        },
+        {
+            "source": "oven-carrier-counterclockwise",
+            "target": "machine-state"
+        },
+        {
+            "source": "oven-heater",
+            "target": "oven-carrier-inside"
+        },
+        {
+            "source": "oven-heater",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "oven-heater",
+            "target": "machine-state"
+        },
+        {
+            "source": "oven-heater",
+            "target": "piece-count"
+        },
+        {
+            "source": "oven-carrier-clockwise",
+            "target": "oven-carrier-inside"
+        },
+        {
+            "source": "oven-carrier-clockwise",
+            "target": "oven-door"
+        },
+        {
+            "source": "oven-carrier-clockwise",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "oven-carrier-clockwise",
+            "target": "oven-carrier-outside"
+        },
+        {
+            "source": "oven-carrier-clockwise",
+            "target": "machine-state"
+        },
+        {
+            "source": "oven-carrier-clockwise",
+            "target": "piece-count"
+        },
+        {
+            "source": "oven-input-photocell",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "oven-input-photocell",
+            "target": "piece-count"
+        },
+        {
+            "source": "OEE",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "OEE",
+            "target": "piece-count"
+        },
+        {
+            "source": "oven-carrier-outside",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "oven-carrier-outside",
+            "target": "oven-input-photocell"
+        },
+        {
+            "source": "oven-carrier-outside",
+            "target": "machine-state"
+        },
+        {
+            "source": "machine-state",
+            "target": "oven-temperature"
+        }
+    ]
+}

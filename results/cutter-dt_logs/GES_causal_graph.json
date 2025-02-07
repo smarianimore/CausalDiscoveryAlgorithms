@@ -1,0 +1,45 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "Anomaly-detected"
+        },
+        {
+            "id": "state"
+        },
+        {
+            "id": "Pieces-done"
+        },
+        {
+            "id": "OEE"
+        }
+    ],
+    "links": [
+        {
+            "source": "Anomaly-detected",
+            "target": "state"
+        },
+        {
+            "source": "state",
+            "target": "Anomaly-detected"
+        },
+        {
+            "source": "state",
+            "target": "OEE"
+        },
+        {
+            "source": "Pieces-done",
+            "target": "OEE"
+        },
+        {
+            "source": "OEE",
+            "target": "state"
+        },
+        {
+            "source": "OEE",
+            "target": "Pieces-done"
+        }
+    ]
+}

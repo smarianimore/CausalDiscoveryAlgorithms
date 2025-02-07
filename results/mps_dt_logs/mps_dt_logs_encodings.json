@@ -1,0 +1,34 @@
+{
+    "turntable-state": {
+        "3": "START",
+        "2": "RESETTING",
+        "1": "READY",
+        "4": "WORKING",
+        "0": "BUSY"
+    },
+    "machine-state": {
+        "1": "READY",
+        "2": "RESETTING",
+        "0": "BUSY"
+    },
+    "oven-state": {
+        "2": "RESETTING",
+        "1": "READY",
+        "3": "START",
+        "0": "BUSY"
+    },
+    "output-conveyor-state": {
+        "3": "START",
+        "2": "RESETTING",
+        "1": "READY",
+        "4": "WORKING",
+        "0": "BUSY"
+    },
+    "vacuum-gripper-state": {
+        "3": "START",
+        "2": "RESETTING",
+        "1": "READY",
+        "4": "WORKING",
+        "0": "BUSY"
+    }
+}

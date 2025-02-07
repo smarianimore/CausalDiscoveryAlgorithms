@@ -1,0 +1,9 @@
+{
+    "machine-state": {
+        "3": "UNKNOWN",
+        "2": "RESETTING",
+        "1": "READY",
+        "4": "WORKING",
+        "0": "BUSY"
+    }
+}

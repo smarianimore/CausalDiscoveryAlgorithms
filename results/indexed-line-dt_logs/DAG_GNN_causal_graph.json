@@ -1,0 +1,85 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "conveyor-in-state"
+        },
+        {
+            "id": "conveyor-out-state"
+        },
+        {
+            "id": "cutter-state"
+        },
+        {
+            "id": "conveyor-out-oee"
+        },
+        {
+            "id": "pickable"
+        },
+        {
+            "id": "conveyor-in-oee"
+        },
+        {
+            "id": "placeable"
+        },
+        {
+            "id": "state"
+        },
+        {
+            "id": "drill-oee"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "cutter-oee"
+        },
+        {
+            "id": "drill-state"
+        }
+    ],
+    "links": [
+        {
+            "source": "conveyor-out-oee",
+            "target": "drill-oee"
+        },
+        {
+            "source": "conveyor-in-oee",
+            "target": "conveyor-out-state"
+        },
+        {
+            "source": "placeable",
+            "target": "conveyor-in-state"
+        },
+        {
+            "source": "placeable",
+            "target": "cutter-oee"
+        },
+        {
+            "source": "state",
+            "target": "conveyor-in-state"
+        },
+        {
+            "source": "state",
+            "target": "conveyor-out-state"
+        },
+        {
+            "source": "state",
+            "target": "cutter-state"
+        },
+        {
+            "source": "drill-oee",
+            "target": "state"
+        },
+        {
+            "source": "drill-oee",
+            "target": "cutter-oee"
+        },
+        {
+            "source": "OEE",
+            "target": "conveyor-in-oee"
+        }
+    ]
+}

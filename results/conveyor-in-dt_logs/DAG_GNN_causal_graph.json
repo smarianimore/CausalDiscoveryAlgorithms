@@ -1,0 +1,88 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "Working-cicle"
+        },
+        {
+            "id": "Conveyor_1-piece-exit"
+        },
+        {
+            "id": "Anomaly-detected"
+        },
+        {
+            "id": "Pieces-done"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "Conveyor_1-piece-ready"
+        },
+        {
+            "id": "Running-cicle"
+        },
+        {
+            "id": "Resetting-phase"
+        },
+        {
+            "id": "state"
+        }
+    ],
+    "links": [
+        {
+            "source": "Working-cicle",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "OEE",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Conveyor_1-piece-ready",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Working-cicle"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Conveyor_1-piece-exit"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Anomaly-detected"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "OEE"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Conveyor_1-piece-ready"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Running-cicle"
+        },
+        {
+            "source": "state",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "state",
+            "target": "Resetting-phase"
+        }
+    ]
+}

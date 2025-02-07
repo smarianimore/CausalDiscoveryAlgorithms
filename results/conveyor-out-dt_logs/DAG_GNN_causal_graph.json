@@ -1,0 +1,118 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "Resetting-cicle"
+        },
+        {
+            "id": "Working-cicle"
+        },
+        {
+            "id": "Anomaly-detected"
+        },
+        {
+            "id": "Piston_2-working-piece"
+        },
+        {
+            "id": "Pieces-done"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "Conveyor_2-piece-done"
+        },
+        {
+            "id": "Conveyor_2-working-piece"
+        },
+        {
+            "id": "Running-cicle"
+        },
+        {
+            "id": "Resetting-phase"
+        },
+        {
+            "id": "state"
+        }
+    ],
+    "links": [
+        {
+            "source": "Resetting-cicle",
+            "target": "Anomaly-detected"
+        },
+        {
+            "source": "Resetting-cicle",
+            "target": "Piston_2-working-piece"
+        },
+        {
+            "source": "Resetting-cicle",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Resetting-cicle",
+            "target": "Conveyor_2-piece-done"
+        },
+        {
+            "source": "Resetting-cicle",
+            "target": "Conveyor_2-working-piece"
+        },
+        {
+            "source": "Resetting-cicle",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Working-cicle",
+            "target": "state"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "OEE",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Conveyor_2-working-piece",
+            "target": "Piston_2-working-piece"
+        },
+        {
+            "source": "Conveyor_2-working-piece",
+            "target": "Conveyor_2-piece-done"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "OEE"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "state"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Piston_2-working-piece"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Conveyor_2-piece-done"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Conveyor_2-working-piece"
+        },
+        {
+            "source": "state",
+            "target": "Pieces-done"
+        }
+    ]
+}

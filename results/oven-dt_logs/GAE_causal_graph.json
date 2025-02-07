@@ -1,0 +1,58 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "oven-carrier-inside"
+        },
+        {
+            "id": "oven-door"
+        },
+        {
+            "id": "oven-temperature"
+        },
+        {
+            "id": "oven-carrier-counterclockwise"
+        },
+        {
+            "id": "oven-heater"
+        },
+        {
+            "id": "oven-carrier-clockwise"
+        },
+        {
+            "id": "oven-input-photocell"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "oven-carrier-outside"
+        },
+        {
+            "id": "machine-state"
+        },
+        {
+            "id": "piece-count"
+        }
+    ],
+    "links": [
+        {
+            "source": "oven-carrier-counterclockwise",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "oven-heater",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "oven-carrier-clockwise",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "machine-state",
+            "target": "oven-temperature"
+        }
+    ]
+}

@@ -1,0 +1,93 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "turntable-state"
+        },
+        {
+            "id": "output-conveyor-oee"
+        },
+        {
+            "id": "machine-state"
+        },
+        {
+            "id": "oven-state"
+        },
+        {
+            "id": "pickable"
+        },
+        {
+            "id": "placeable"
+        },
+        {
+            "id": "output-conveyor-state"
+        },
+        {
+            "id": "vacuum-gripper-state"
+        },
+        {
+            "id": "oven-oee"
+        },
+        {
+            "id": "turntable-oee"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "vacuum-gripper-oee"
+        }
+    ],
+    "links": [
+        {
+            "source": "machine-state",
+            "target": "vacuum-gripper-state"
+        },
+        {
+            "source": "pickable",
+            "target": "output-conveyor-state"
+        },
+        {
+            "source": "placeable",
+            "target": "oven-state"
+        },
+        {
+            "source": "oven-oee",
+            "target": "oven-state"
+        },
+        {
+            "source": "oven-oee",
+            "target": "vacuum-gripper-state"
+        },
+        {
+            "source": "turntable-oee",
+            "target": "turntable-state"
+        },
+        {
+            "source": "OEE",
+            "target": "turntable-state"
+        },
+        {
+            "source": "OEE",
+            "target": "oven-state"
+        },
+        {
+            "source": "OEE",
+            "target": "output-conveyor-state"
+        },
+        {
+            "source": "OEE",
+            "target": "vacuum-gripper-state"
+        },
+        {
+            "source": "vacuum-gripper-oee",
+            "target": "turntable-state"
+        },
+        {
+            "source": "vacuum-gripper-oee",
+            "target": "oven-state"
+        }
+    ]
+}

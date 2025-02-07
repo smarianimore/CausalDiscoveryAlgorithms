@@ -1,0 +1,108 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "Working-cicle"
+        },
+        {
+            "id": "Conveyor_1-piece-exit"
+        },
+        {
+            "id": "Anomaly-detected"
+        },
+        {
+            "id": "Pieces-done"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "Conveyor_1-piece-ready"
+        },
+        {
+            "id": "Running-cicle"
+        },
+        {
+            "id": "Resetting-phase"
+        },
+        {
+            "id": "state"
+        }
+    ],
+    "links": [
+        {
+            "source": "Working-cicle",
+            "target": "OEE"
+        },
+        {
+            "source": "Working-cicle",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Working-cicle",
+            "target": "state"
+        },
+        {
+            "source": "Conveyor_1-piece-exit",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Conveyor_1-piece-exit",
+            "target": "state"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Running-cicle"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "state"
+        },
+        {
+            "source": "Pieces-done",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Pieces-done",
+            "target": "state"
+        },
+        {
+            "source": "OEE",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "OEE",
+            "target": "Running-cicle"
+        },
+        {
+            "source": "OEE",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "OEE",
+            "target": "state"
+        },
+        {
+            "source": "Conveyor_1-piece-ready",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Conveyor_1-piece-ready",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "state",
+            "target": "Resetting-phase"
+        }
+    ]
+}

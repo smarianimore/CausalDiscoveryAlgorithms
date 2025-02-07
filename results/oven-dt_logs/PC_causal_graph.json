@@ -1,0 +1,110 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "oven-carrier-inside"
+        },
+        {
+            "id": "oven-door"
+        },
+        {
+            "id": "oven-temperature"
+        },
+        {
+            "id": "oven-carrier-counterclockwise"
+        },
+        {
+            "id": "oven-heater"
+        },
+        {
+            "id": "oven-carrier-clockwise"
+        },
+        {
+            "id": "oven-input-photocell"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "oven-carrier-outside"
+        },
+        {
+            "id": "machine-state"
+        },
+        {
+            "id": "piece-count"
+        }
+    ],
+    "links": [
+        {
+            "source": "oven-carrier-inside",
+            "target": "oven-door"
+        },
+        {
+            "source": "oven-carrier-inside",
+            "target": "oven-input-photocell"
+        },
+        {
+            "source": "oven-door",
+            "target": "oven-carrier-counterclockwise"
+        },
+        {
+            "source": "oven-door",
+            "target": "oven-heater"
+        },
+        {
+            "source": "oven-door",
+            "target": "oven-carrier-clockwise"
+        },
+        {
+            "source": "oven-temperature",
+            "target": "oven-carrier-counterclockwise"
+        },
+        {
+            "source": "oven-temperature",
+            "target": "oven-heater"
+        },
+        {
+            "source": "oven-temperature",
+            "target": "oven-carrier-clockwise"
+        },
+        {
+            "source": "oven-heater",
+            "target": "oven-carrier-inside"
+        },
+        {
+            "source": "oven-carrier-clockwise",
+            "target": "oven-carrier-inside"
+        },
+        {
+            "source": "oven-carrier-clockwise",
+            "target": "oven-carrier-outside"
+        },
+        {
+            "source": "oven-input-photocell",
+            "target": "OEE"
+        },
+        {
+            "source": "oven-input-photocell",
+            "target": "oven-carrier-outside"
+        },
+        {
+            "source": "oven-carrier-outside",
+            "target": "oven-carrier-inside"
+        },
+        {
+            "source": "oven-carrier-outside",
+            "target": "machine-state"
+        },
+        {
+            "source": "machine-state",
+            "target": "oven-carrier-counterclockwise"
+        },
+        {
+            "source": "piece-count",
+            "target": "OEE"
+        }
+    ]
+}

@@ -1,0 +1,90 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "oven-carrier-inside"
+        },
+        {
+            "id": "oven-door"
+        },
+        {
+            "id": "oven-temperature"
+        },
+        {
+            "id": "oven-carrier-counterclockwise"
+        },
+        {
+            "id": "oven-heater"
+        },
+        {
+            "id": "oven-carrier-clockwise"
+        },
+        {
+            "id": "oven-input-photocell"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "oven-carrier-outside"
+        },
+        {
+            "id": "machine-state"
+        },
+        {
+            "id": "piece-count"
+        }
+    ],
+    "links": [
+        {
+            "source": "oven-carrier-inside",
+            "target": "OEE"
+        },
+        {
+            "source": "oven-door",
+            "target": "oven-input-photocell"
+        },
+        {
+            "source": "oven-carrier-counterclockwise",
+            "target": "oven-door"
+        },
+        {
+            "source": "oven-heater",
+            "target": "oven-carrier-inside"
+        },
+        {
+            "source": "oven-heater",
+            "target": "machine-state"
+        },
+        {
+            "source": "oven-input-photocell",
+            "target": "oven-carrier-outside"
+        },
+        {
+            "source": "OEE",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "OEE",
+            "target": "piece-count"
+        },
+        {
+            "source": "oven-carrier-outside",
+            "target": "oven-heater"
+        },
+        {
+            "source": "machine-state",
+            "target": "oven-carrier-inside"
+        },
+        {
+            "source": "machine-state",
+            "target": "oven-temperature"
+        },
+        {
+            "source": "piece-count",
+            "target": "oven-temperature"
+        }
+    ]
+}

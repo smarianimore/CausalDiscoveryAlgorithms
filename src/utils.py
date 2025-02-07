@@ -87,7 +87,7 @@ def label_encode_categoricals(df: pd.DataFrame, name: str) -> pd.DataFrame:
     logging.info(f"{objects=}")
     le = LabelEncoder()
     df[objects] = df[objects].apply(le.fit_transform)
-    logging.info(f"Label-encoded data types:\n{df.dtypes}")
+    #logging.info(f"Label-encoded data types:\n{df.dtypes}")
     encodings = {}
     for col in objects:
         labels = [int(label) for label in df[col].unique()]
@@ -103,7 +103,7 @@ def label_encode_categoricals(df: pd.DataFrame, name: str) -> pd.DataFrame:
     bools = df.select_dtypes(include=["bool"]).columns
     for col in bools:
         df[col] = df[col].astype(int)
-    print(f"########## Final data types:\n{df.dtypes}")
+    #print(f"########## Final data types:\n{df.dtypes}")
     return df
 
 
@@ -123,7 +123,7 @@ def process_data(data: pd.DataFrame, ignore_cols: list[str], outpath: str) -> pd
     if ignore_cols:
         data = data.drop(columns=ignore_cols)
     #data = data.convert_dtypes()
-    print(f"########## Raw data types:\n{data.dtypes}")
+    #print(f"########## Raw data types:\n{data.dtypes}")
     data = data.fillna(0)  # TODO questionable
     df = label_encode_categoricals(data, out_file_name)
     return df

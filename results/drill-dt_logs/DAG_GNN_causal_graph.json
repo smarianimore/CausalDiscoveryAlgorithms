@@ -1,0 +1,145 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "Resetting-cicle"
+        },
+        {
+            "id": "Working-cicle"
+        },
+        {
+            "id": "Drill-conveyor-running"
+        },
+        {
+            "id": "Anomaly-detected"
+        },
+        {
+            "id": "Running-cicle"
+        },
+        {
+            "id": "Resetting-phase"
+        },
+        {
+            "id": "Drill-running"
+        },
+        {
+            "id": "Drill-photocell"
+        },
+        {
+            "id": "state"
+        },
+        {
+            "id": "Pieces-done"
+        },
+        {
+            "id": "Drill-working-piece"
+        },
+        {
+            "id": "OEE"
+        }
+    ],
+    "links": [
+        {
+            "source": "Resetting-cicle",
+            "target": "Drill-conveyor-running"
+        },
+        {
+            "source": "Resetting-cicle",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Resetting-cicle",
+            "target": "Drill-running"
+        },
+        {
+            "source": "Resetting-cicle",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Resetting-cicle",
+            "target": "Drill-working-piece"
+        },
+        {
+            "source": "Working-cicle",
+            "target": "Drill-conveyor-running"
+        },
+        {
+            "source": "Working-cicle",
+            "target": "state"
+        },
+        {
+            "source": "Drill-conveyor-running",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Drill-conveyor-running"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Drill-running"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Drill-working-piece"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Resetting-cicle"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Anomaly-detected"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Drill-running"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Drill-working-piece"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Drill-working-piece"
+        },
+        {
+            "source": "Drill-running",
+            "target": "Drill-conveyor-running"
+        },
+        {
+            "source": "Drill-running",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "state",
+            "target": "Drill-conveyor-running"
+        },
+        {
+            "source": "state",
+            "target": "Drill-working-piece"
+        },
+        {
+            "source": "OEE",
+            "target": "Pieces-done"
+        }
+    ]
+}

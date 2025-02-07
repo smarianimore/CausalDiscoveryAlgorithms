@@ -1,0 +1,49 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "turntable-state"
+        },
+        {
+            "id": "output-conveyor-oee"
+        },
+        {
+            "id": "machine-state"
+        },
+        {
+            "id": "oven-state"
+        },
+        {
+            "id": "pickable"
+        },
+        {
+            "id": "placeable"
+        },
+        {
+            "id": "output-conveyor-state"
+        },
+        {
+            "id": "vacuum-gripper-state"
+        },
+        {
+            "id": "oven-oee"
+        },
+        {
+            "id": "turntable-oee"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "vacuum-gripper-oee"
+        }
+    ],
+    "links": [
+        {
+            "source": "placeable",
+            "target": "oven-state"
+        }
+    ]
+}

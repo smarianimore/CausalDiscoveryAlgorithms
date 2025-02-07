@@ -1,0 +1,9 @@
+{
+    "state": {
+        "3": "START",
+        "1": "READY",
+        "4": "WORKING",
+        "0": "INHERITED_ANOMALY",
+        "2": "RESET"
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "output-conveyor-state-anomaly"
+        },
+        {
+            "id": "output-conveyor-motor"
+        },
+        {
+            "id": "machine-state"
+        },
+        {
+            "id": "piece-count"
+        },
+        {
+            "id": "output-conveyor-output-photocell"
+        },
+        {
+            "id": "OEE"
+        }
+    ],
+    "links": [
+        {
+            "source": "output-conveyor-motor",
+            "target": "machine-state"
+        },
+        {
+            "source": "machine-state",
+            "target": "piece-count"
+        },
+        {
+            "source": "output-conveyor-output-photocell",
+            "target": "output-conveyor-motor"
+        },
+        {
+            "source": "output-conveyor-output-photocell",
+            "target": "machine-state"
+        },
+        {
+            "source": "output-conveyor-output-photocell",
+            "target": "piece-count"
+        }
+    ]
+}

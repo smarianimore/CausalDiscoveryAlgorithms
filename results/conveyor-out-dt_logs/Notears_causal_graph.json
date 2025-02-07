@@ -1,0 +1,70 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "Resetting-cicle"
+        },
+        {
+            "id": "Working-cicle"
+        },
+        {
+            "id": "Anomaly-detected"
+        },
+        {
+            "id": "Piston_2-working-piece"
+        },
+        {
+            "id": "Pieces-done"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "Conveyor_2-piece-done"
+        },
+        {
+            "id": "Conveyor_2-working-piece"
+        },
+        {
+            "id": "Running-cicle"
+        },
+        {
+            "id": "Resetting-phase"
+        },
+        {
+            "id": "state"
+        }
+    ],
+    "links": [
+        {
+            "source": "Working-cicle",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Piston_2-working-piece",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "OEE",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Conveyor_2-piece-done",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Conveyor_2-working-piece",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "state",
+            "target": "Pieces-done"
+        }
+    ]
+}

@@ -1,0 +1,117 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "turntable-state"
+        },
+        {
+            "id": "output-conveyor-oee"
+        },
+        {
+            "id": "machine-state"
+        },
+        {
+            "id": "oven-state"
+        },
+        {
+            "id": "pickable"
+        },
+        {
+            "id": "placeable"
+        },
+        {
+            "id": "output-conveyor-state"
+        },
+        {
+            "id": "vacuum-gripper-state"
+        },
+        {
+            "id": "oven-oee"
+        },
+        {
+            "id": "turntable-oee"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "vacuum-gripper-oee"
+        }
+    ],
+    "links": [
+        {
+            "source": "output-conveyor-oee",
+            "target": "pickable"
+        },
+        {
+            "source": "output-conveyor-oee",
+            "target": "turntable-oee"
+        },
+        {
+            "source": "machine-state",
+            "target": "turntable-state"
+        },
+        {
+            "source": "machine-state",
+            "target": "oven-state"
+        },
+        {
+            "source": "machine-state",
+            "target": "vacuum-gripper-state"
+        },
+        {
+            "source": "pickable",
+            "target": "oven-state"
+        },
+        {
+            "source": "pickable",
+            "target": "output-conveyor-state"
+        },
+        {
+            "source": "pickable",
+            "target": "turntable-oee"
+        },
+        {
+            "source": "placeable",
+            "target": "oven-state"
+        },
+        {
+            "source": "placeable",
+            "target": "vacuum-gripper-oee"
+        },
+        {
+            "source": "output-conveyor-state",
+            "target": "machine-state"
+        },
+        {
+            "source": "oven-oee",
+            "target": "machine-state"
+        },
+        {
+            "source": "oven-oee",
+            "target": "output-conveyor-state"
+        },
+        {
+            "source": "oven-oee",
+            "target": "vacuum-gripper-state"
+        },
+        {
+            "source": "turntable-oee",
+            "target": "placeable"
+        },
+        {
+            "source": "turntable-oee",
+            "target": "vacuum-gripper-oee"
+        },
+        {
+            "source": "vacuum-gripper-oee",
+            "target": "machine-state"
+        },
+        {
+            "source": "vacuum-gripper-oee",
+            "target": "oven-oee"
+        }
+    ]
+}

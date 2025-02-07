@@ -1,0 +1,52 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "vacuum-gripper-motor-clockwise"
+        },
+        {
+            "id": "vacuum-gripper-at-turntable"
+        },
+        {
+            "id": "vacuum-gripper-motor-counterclockwise"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "vacuum-gripper-at-oven"
+        },
+        {
+            "id": "machine-state"
+        },
+        {
+            "id": "piece-count"
+        },
+        {
+            "id": "vacuum-gripper-piston"
+        },
+        {
+            "id": "vacuum-gripper-gripper"
+        }
+    ],
+    "links": [
+        {
+            "source": "vacuum-gripper-at-turntable",
+            "target": "machine-state"
+        },
+        {
+            "source": "OEE",
+            "target": "piece-count"
+        },
+        {
+            "source": "vacuum-gripper-at-oven",
+            "target": "vacuum-gripper-at-turntable"
+        },
+        {
+            "source": "vacuum-gripper-gripper",
+            "target": "machine-state"
+        }
+    ]
+}

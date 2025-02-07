@@ -1,0 +1,193 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "Resetting-cicle"
+        },
+        {
+            "id": "Working-cicle"
+        },
+        {
+            "id": "Drill-conveyor-running"
+        },
+        {
+            "id": "Anomaly-detected"
+        },
+        {
+            "id": "Running-cicle"
+        },
+        {
+            "id": "Resetting-phase"
+        },
+        {
+            "id": "Drill-running"
+        },
+        {
+            "id": "Drill-photocell"
+        },
+        {
+            "id": "state"
+        },
+        {
+            "id": "Pieces-done"
+        },
+        {
+            "id": "Drill-working-piece"
+        },
+        {
+            "id": "OEE"
+        }
+    ],
+    "links": [
+        {
+            "source": "Resetting-cicle",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Working-cicle",
+            "target": "Resetting-cicle"
+        },
+        {
+            "source": "Working-cicle",
+            "target": "Running-cicle"
+        },
+        {
+            "source": "Working-cicle",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Working-cicle",
+            "target": "state"
+        },
+        {
+            "source": "Drill-conveyor-running",
+            "target": "Resetting-cicle"
+        },
+        {
+            "source": "Drill-conveyor-running",
+            "target": "Running-cicle"
+        },
+        {
+            "source": "Drill-conveyor-running",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Drill-conveyor-running",
+            "target": "Drill-running"
+        },
+        {
+            "source": "Drill-conveyor-running",
+            "target": "state"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Resetting-cicle"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Running-cicle"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Resetting-cicle"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "state"
+        },
+        {
+            "source": "Resetting-phase",
+            "target": "Resetting-cicle"
+        },
+        {
+            "source": "Drill-running",
+            "target": "Resetting-cicle"
+        },
+        {
+            "source": "Drill-running",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Drill-running",
+            "target": "Drill-working-piece"
+        },
+        {
+            "source": "Drill-photocell",
+            "target": "Resetting-cicle"
+        },
+        {
+            "source": "Drill-photocell",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Drill-photocell",
+            "target": "Drill-running"
+        },
+        {
+            "source": "Drill-photocell",
+            "target": "Drill-working-piece"
+        },
+        {
+            "source": "state",
+            "target": "Resetting-cicle"
+        },
+        {
+            "source": "state",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Pieces-done",
+            "target": "Resetting-cicle"
+        },
+        {
+            "source": "Pieces-done",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Pieces-done",
+            "target": "OEE"
+        },
+        {
+            "source": "Drill-working-piece",
+            "target": "Resetting-cicle"
+        },
+        {
+            "source": "Drill-working-piece",
+            "target": "Working-cicle"
+        },
+        {
+            "source": "Drill-working-piece",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "Drill-working-piece",
+            "target": "state"
+        },
+        {
+            "source": "OEE",
+            "target": "Resetting-cicle"
+        },
+        {
+            "source": "OEE",
+            "target": "Running-cicle"
+        },
+        {
+            "source": "OEE",
+            "target": "Resetting-phase"
+        },
+        {
+            "source": "OEE",
+            "target": "Pieces-done"
+        }
+    ]
+}

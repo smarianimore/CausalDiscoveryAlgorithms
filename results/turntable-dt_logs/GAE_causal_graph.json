@@ -1,0 +1,63 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "turntable-pusher"
+        },
+        {
+            "id": "turntable-at-saw"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "turntable-saw"
+        },
+        {
+            "id": "turntable-at-placing-point"
+        },
+        {
+            "id": "machine-state"
+        },
+        {
+            "id": "turntable-motor-clockwise"
+        },
+        {
+            "id": "piece-count"
+        },
+        {
+            "id": "turntable-motor-counterclockwise"
+        },
+        {
+            "id": "turntable-at-output"
+        }
+    ],
+    "links": [
+        {
+            "source": "OEE",
+            "target": "piece-count"
+        },
+        {
+            "source": "turntable-saw",
+            "target": "turntable-at-saw"
+        },
+        {
+            "source": "turntable-saw",
+            "target": "turntable-at-placing-point"
+        },
+        {
+            "source": "turntable-saw",
+            "target": "turntable-motor-clockwise"
+        },
+        {
+            "source": "turntable-saw",
+            "target": "turntable-motor-counterclockwise"
+        },
+        {
+            "source": "turntable-saw",
+            "target": "turntable-at-output"
+        }
+    ]
+}

@@ -1,0 +1,113 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "Resetting-cicle"
+        },
+        {
+            "id": "Working-cicle"
+        },
+        {
+            "id": "Drill-conveyor-running"
+        },
+        {
+            "id": "Anomaly-detected"
+        },
+        {
+            "id": "Running-cicle"
+        },
+        {
+            "id": "Resetting-phase"
+        },
+        {
+            "id": "Drill-running"
+        },
+        {
+            "id": "Drill-photocell"
+        },
+        {
+            "id": "state"
+        },
+        {
+            "id": "Pieces-done"
+        },
+        {
+            "id": "Drill-working-piece"
+        },
+        {
+            "id": "OEE"
+        }
+    ],
+    "links": [
+        {
+            "source": "Working-cicle",
+            "target": "state"
+        },
+        {
+            "source": "Working-cicle",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Drill-conveyor-running",
+            "target": "Drill-running"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Drill-conveyor-running"
+        },
+        {
+            "source": "Anomaly-detected",
+            "target": "Drill-photocell"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Working-cicle"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "state"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Drill-running",
+            "target": "Drill-working-piece"
+        },
+        {
+            "source": "Drill-running",
+            "target": "OEE"
+        },
+        {
+            "source": "Drill-photocell",
+            "target": "Drill-conveyor-running"
+        },
+        {
+            "source": "state",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Drill-working-piece",
+            "target": "Working-cicle"
+        },
+        {
+            "source": "Drill-working-piece",
+            "target": "Running-cicle"
+        },
+        {
+            "source": "OEE",
+            "target": "Running-cicle"
+        },
+        {
+            "source": "OEE",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "OEE",
+            "target": "Drill-working-piece"
+        }
+    ]
+}

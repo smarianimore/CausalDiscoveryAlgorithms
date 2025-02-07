@@ -1,0 +1,86 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "Resetting-cicle"
+        },
+        {
+            "id": "Working-cicle"
+        },
+        {
+            "id": "Anomaly-detected"
+        },
+        {
+            "id": "Piston_2-working-piece"
+        },
+        {
+            "id": "Pieces-done"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "Conveyor_2-piece-done"
+        },
+        {
+            "id": "Conveyor_2-working-piece"
+        },
+        {
+            "id": "Running-cicle"
+        },
+        {
+            "id": "Resetting-phase"
+        },
+        {
+            "id": "state"
+        }
+    ],
+    "links": [
+        {
+            "source": "Working-cicle",
+            "target": "OEE"
+        },
+        {
+            "source": "Piston_2-working-piece",
+            "target": "Working-cicle"
+        },
+        {
+            "source": "Piston_2-working-piece",
+            "target": "Conveyor_2-piece-done"
+        },
+        {
+            "source": "OEE",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Conveyor_2-piece-done",
+            "target": "Working-cicle"
+        },
+        {
+            "source": "Conveyor_2-piece-done",
+            "target": "OEE"
+        },
+        {
+            "source": "Conveyor_2-working-piece",
+            "target": "state"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Piston_2-working-piece"
+        },
+        {
+            "source": "Running-cicle",
+            "target": "Conveyor_2-piece-done"
+        },
+        {
+            "source": "state",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "state",
+            "target": "Running-cicle"
+        }
+    ]
+}

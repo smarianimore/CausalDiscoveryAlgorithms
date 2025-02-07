@@ -1,0 +1,87 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "turntable-pusher"
+        },
+        {
+            "id": "turntable-at-saw"
+        },
+        {
+            "id": "OEE"
+        },
+        {
+            "id": "turntable-saw"
+        },
+        {
+            "id": "turntable-at-placing-point"
+        },
+        {
+            "id": "machine-state"
+        },
+        {
+            "id": "turntable-motor-clockwise"
+        },
+        {
+            "id": "piece-count"
+        },
+        {
+            "id": "turntable-motor-counterclockwise"
+        },
+        {
+            "id": "turntable-at-output"
+        }
+    ],
+    "links": [
+        {
+            "source": "turntable-pusher",
+            "target": "turntable-at-placing-point"
+        },
+        {
+            "source": "turntable-pusher",
+            "target": "machine-state"
+        },
+        {
+            "source": "turntable-pusher",
+            "target": "turntable-motor-clockwise"
+        },
+        {
+            "source": "turntable-at-saw",
+            "target": "turntable-at-placing-point"
+        },
+        {
+            "source": "turntable-at-saw",
+            "target": "machine-state"
+        },
+        {
+            "source": "turntable-at-saw",
+            "target": "turntable-at-output"
+        },
+        {
+            "source": "OEE",
+            "target": "turntable-at-placing-point"
+        },
+        {
+            "source": "OEE",
+            "target": "piece-count"
+        },
+        {
+            "source": "turntable-at-placing-point",
+            "target": "machine-state"
+        },
+        {
+            "source": "turntable-at-placing-point",
+            "target": "turntable-at-output"
+        },
+        {
+            "source": "turntable-motor-clockwise",
+            "target": "turntable-at-output"
+        },
+        {
+            "source": "turntable-motor-counterclockwise",
+            "target": "turntable-at-output"
+        }
+    ]
+}

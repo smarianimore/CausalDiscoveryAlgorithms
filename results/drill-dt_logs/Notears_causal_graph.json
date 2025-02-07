@@ -1,0 +1,73 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "id": "Resetting-cicle"
+        },
+        {
+            "id": "Working-cicle"
+        },
+        {
+            "id": "Drill-conveyor-running"
+        },
+        {
+            "id": "Anomaly-detected"
+        },
+        {
+            "id": "Running-cicle"
+        },
+        {
+            "id": "Resetting-phase"
+        },
+        {
+            "id": "Drill-running"
+        },
+        {
+            "id": "Drill-photocell"
+        },
+        {
+            "id": "state"
+        },
+        {
+            "id": "Pieces-done"
+        },
+        {
+            "id": "Drill-working-piece"
+        },
+        {
+            "id": "OEE"
+        }
+    ],
+    "links": [
+        {
+            "source": "Working-cicle",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Drill-conveyor-running",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Drill-running",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "state",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "Drill-working-piece",
+            "target": "state"
+        },
+        {
+            "source": "Drill-working-piece",
+            "target": "Pieces-done"
+        },
+        {
+            "source": "OEE",
+            "target": "Pieces-done"
+        }
+    ]
+}
