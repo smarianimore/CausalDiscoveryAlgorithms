@@ -76,6 +76,7 @@ if __name__ == "__main__":
     #print(f"PRE {data.columns=}")
     df = process_data(data, [], input_data_file_path)
     #print(f"POST {data.columns=}")
+
     gt_graph = load_digraph_from_json(gt_graph_filepath)
     gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
     run_algorithms(df, input_data_file_path, gt_array)

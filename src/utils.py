@@ -85,13 +85,16 @@ def label_encode_categoricals(df: pd.DataFrame, name: str) -> pd.DataFrame:
     objects = df.select_dtypes(include=["object"]).columns
     #objects = df.select_dtypes(include=["string[python]"]).columns
     logging.info(f"{objects=}")
-    le = LabelEncoder()
-    df[objects] = df[objects].apply(le.fit_transform)
+    le_map = {}
+    for col in objects:
+        le = LabelEncoder()
+        df[col] = le.fit_transform(df[col])
+        le_map[col] = le
     #logging.info(f"Label-encoded data types:\n{df.dtypes}")
     encodings = {}
     for col in objects:
         labels = [int(label) for label in df[col].unique()]
-        originals = le.inverse_transform(labels)
+        originals = le_map[col].inverse_transform(labels)
         encoding = dict(zip(labels, originals))
         logging.info(f"encoding of {col}: {encoding}")
         encodings[col] = encoding
