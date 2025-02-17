@@ -62,11 +62,11 @@ def label_encode_categoricals(df: pd.DataFrame, name: str, out_path: str) -> pd.
         Returns:
             pd.DataFrame: The DataFrame with the categorical columns label encoded.
         """
-    df = df.convert_dtypes()
-    #LOG.info(f"\traw data types:\n{df.dtypes}")
+    #df = df.convert_dtypes()
+    print(f"raw data types:\n{df.dtypes}")
     objects = df.select_dtypes(include=["object"]).columns
     #objects = df.select_dtypes(include=["string[python]"]).columns
-    print(f"need encoding: {objects}")
+    #print(f"\tneed encoding: {objects}")
     le_map = {}
     for col in objects:
         le = LabelEncoder()
@@ -78,7 +78,7 @@ def label_encode_categoricals(df: pd.DataFrame, name: str, out_path: str) -> pd.
         labels = [int(label) for label in df[col].unique()]
         originals = le_map[col].inverse_transform(labels)
         encoding = dict(zip(labels, originals))
-        print(f"encoding of {col}: {encoding}")
+        print(f"\tencoding of {col}: {encoding}")
         encodings[col] = encoding
     current_dir = f"results/{name}"
     os.makedirs(current_dir, exist_ok=True)
@@ -88,6 +88,7 @@ def label_encode_categoricals(df: pd.DataFrame, name: str, out_path: str) -> pd.
     bools = df.select_dtypes(include=["bool"]).columns
     for col in bools:
         df[col] = df[col].astype(int)
+    print(f"processed data types:\n{df.dtypes}")
     return df
 
 
@@ -211,7 +212,7 @@ if __name__ == "__main__":
     df_merged = pd.merge(df_mps, df_line, how='inner', left_index=True, right_index=True, suffixes=('_mps', '_line'))
     df_merged.drop(columns=[col for col in df_merged.columns if 'Timestamp' in col or 'Source' in col], inplace=True,
                    axis=1)
-    df_merged = label_encode_categoricals(df_merged, name, f"models/{args.output}")
+    df_merged = label_encode_categoricals(df_merged, name, f"results/{args.output}")
     df_merged = discretize(args, df_merged)
 
     gt_graph = load_digraph_from_json(None)
