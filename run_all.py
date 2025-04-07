@@ -68,11 +68,9 @@ def run_algorithms(
 
 
 if __name__ == "__main__":
-    input_data_file_path = "../Datasets-causality/DigitaTwins-Fischer/multi-process-station-data/vacuum-gripper-dt_logs.csv"
-    gt_graph_filepath = "../Datasets-causality/DigitaTwins-Fischer/multi-process-station-graphs/Vacuum-Gripper_Graph-reduced.json"
-    data = pd.read_csv(input_data_file_path, usecols=['vacuum-gripper-motor-clockwise', 'vacuum-gripper-at-turntable',
-                                                      'vacuum-gripper-motor-counterclockwise', 'OEE', 'vacuum-gripper-at-oven',
-                                                      'machine-state', 'piece-count', 'vacuum-gripper-piston', 'vacuum-gripper-gripper'])
+    input_data_file_path = "../Datasets-causality/DigitaTwins-Fischer/indexed-line-data/indexed-line-dt_logs.csv"
+    gt_graph_filepath = None # "../Datasets-causality/DigitaTwins-Fischer/multi-process-station-graphs/Vacuum-Gripper_Graph-reduced.json"
+    data = pd.read_csv(input_data_file_path, usecols=["conveyor-in-state","conveyor-out-state","cutter-state","conveyor-out-oee","conveyor-in-oee","state","drill-oee","OEE","cutter-oee","drill-state"])
     #print(f"PRE {data.columns=}")
     df = process_data(data, [], input_data_file_path)
     #print(f"POST {data.columns=}")

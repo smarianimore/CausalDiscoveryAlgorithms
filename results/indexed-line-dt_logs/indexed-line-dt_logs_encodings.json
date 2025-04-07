@@ -1,6 +1,6 @@
 {
     "conveyor-in-state": {
-        "4": "START",
+        "4": "WORKING",
         "1": "READY",
         "0": "INHERITED_ANOMALY",
         "3": "RESETTING",
@@ -23,10 +23,10 @@
         "2": "RESET"
     },
     "state": {
-        "2": "RESET",
-        "1": "READY",
-        "0": "INHERITED_ANOMALY",
-        "3": "RESETTING"
+        "2": "START",
+        "1": "RESETTING",
+        "0": "READY",
+        "3": "WORKING"
     },
     "drill-state": {
         "4": "START",
