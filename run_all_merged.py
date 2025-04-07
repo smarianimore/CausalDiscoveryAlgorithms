@@ -135,6 +135,8 @@ if __name__ == "__main__":
     df_merged = label_encode_categoricals(df_merged, name, f"results/{args.output}")
     df_merged = discretize(args, df_merged)
 
+    df_merged.to_csv(f"results/{name}/{name}.csv", index=False)
+
     gt_graph = load_digraph_from_json(None)
     gt_array = get_my_adjacency_matrix(gt_graph) if gt_graph is not None else None
     run_algorithms(df_merged, name, gt_array)
